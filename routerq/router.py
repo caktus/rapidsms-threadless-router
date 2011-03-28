@@ -9,9 +9,8 @@ import time
 from django.dispatch import Signal
 
 from rapidsms.log.mixin import LoggerMixin
-from rapidsms.backends.base import BackendBase
 from rapidsms.apps.base import AppBase
-from rapidsms.conf import settings
+from rapidsms.utils.modules import try_import, get_class
 
 
 class Router(object, LoggerMixin):
@@ -81,12 +80,41 @@ class Router(object, LoggerMixin):
             except:
                 app.exception()
 
+    def add_backend(self, name, module_name, config=None):
+        """
+        Find the backend named *module_name*, instantiate it, and add it
+        to the dict of backends to be polled for incoming messages, once
+        the router is started. Return the backend instance.
+        """
+        from routerq.backends import BackendBase
+        cls = BackendBase.find(module_name)
+        if cls is None: return None
+
+        config = self._clean_backend_config(config or {})
+        backend = cls(self, name, **config)
+        self.backends[name] = backend
+        return backend
+
+    @staticmethod
+    def _clean_backend_config(config):
+        """
+        Return ``config`` (a dict) with the keys downcased. (This is
+        intended to make the backend configuration case insensitive.)
+        """
+
+        return dict([
+            (key.lower(), val)
+            for key, val in config.iteritems()
+        ])
+
     def start(self):
         self.info("starting router")
+        from django.conf import settings
         for name in settings.INSTALLED_APPS:
             self.add_app(name)
+        print settings.INSTALLED_BACKENDS
         for name, conf in settings.INSTALLED_BACKENDS.items():
-            self.add_backend(name, conf.pop("ENGINE"), conf)
+            self.add_backend(name, conf.get("ENGINE"), conf)
         self._start_all_apps()
         self.running = True
 
@@ -169,12 +197,19 @@ class Router(object, LoggerMixin):
             pass
 
         # now send the message's responses
-        msg.flush_responses()
+        self.flush_responses(msg)
+
+    def flush_responses(self, msg):
+        for response in msg.responses:
+            self.outgoing(response)
 
         # we are no longer interested in this message... but some crazy
         # synchronous backends might be, so mark it as processed.
         msg.processed = True
 
+    def send_now(self, msg):
+        backend_name = msg.connection.backend.name
+        self.backends[backend_name].send(msg)
 
     def outgoing(self, msg):
         """
@@ -206,4 +241,4 @@ class Router(object, LoggerMixin):
                     self.warning("Message cancelled")
                     return False
 
-        return msg.send_now()
+        self.send_now(msg)
