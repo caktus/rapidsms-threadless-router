@@ -3,7 +3,7 @@ import datetime
 from rapidsms.models import Connection, Backend
 
 from routerq.router import Router
-from routerq.messages import IncomingMessage
+from rapidsms.messages import IncomingMessage
 
 
 __all__ = ('queue',)
