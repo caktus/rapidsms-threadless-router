@@ -11,6 +11,7 @@ from django.dispatch import Signal
 from rapidsms.log.mixin import LoggerMixin
 from rapidsms.apps.base import AppBase
 from rapidsms.utils.modules import try_import, get_class
+from rapidsms.conf import settings
 
 
 class Router(object, LoggerMixin):
@@ -109,10 +110,8 @@ class Router(object, LoggerMixin):
 
     def start(self):
         self.info("starting router")
-        from django.conf import settings
         for name in settings.INSTALLED_APPS:
             self.add_app(name)
-        print settings.INSTALLED_BACKENDS
         for name, conf in settings.INSTALLED_BACKENDS.items():
             self.add_backend(name, conf.get("ENGINE"), conf)
         self._start_all_apps()
