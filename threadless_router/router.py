@@ -10,6 +10,7 @@ from django.dispatch import Signal
 
 from rapidsms.log.mixin import LoggerMixin
 from rapidsms.apps.base import AppBase
+from rapidsms.backends.base import BackendBase
 from rapidsms.utils.modules import try_import, get_class
 from rapidsms.conf import settings
 
@@ -87,7 +88,6 @@ class Router(object, LoggerMixin):
         to the dict of backends to be polled for incoming messages, once
         the router is started. Return the backend instance.
         """
-        from routerq.backends import BackendBase
         cls = BackendBase.find(module_name)
         if cls is None: return None
 
