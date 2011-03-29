@@ -1,7 +1,7 @@
 from rapidsms.log.mixin import LoggerMixin
 from rapidsms.utils.modules import try_import, get_class
 
-from routerq.base import queue
+from threadless_router.base import queue
 
 
 __all__ = ('BackendBase',)
