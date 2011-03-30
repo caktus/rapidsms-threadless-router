@@ -11,8 +11,8 @@ setup(
     exclude_package_data={
         '': ['*.sql', '*.pyc'],
     },
-    url='http://github.com/caktus/rapidsms-routerq/',
+    url='https://github.com/caktus/rapidsms-threadless-router',
     license='LICENSE.txt',
-    description='Threadless router implementation for RapidSMS ',
+    description='Threadless router implementation for RapidSMS',
     long_description=open('README.rst').read(),
 )
