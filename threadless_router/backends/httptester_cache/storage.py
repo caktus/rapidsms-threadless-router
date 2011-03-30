@@ -5,7 +5,7 @@ from django.core.cache import cache
 from threadless_router.base import queue
 
 
-CACHE_KEY = 'http-tester-cache'
+CACHE_KEY = 'rapidsms-httptester-cache'
 
 
 def get_messages():
