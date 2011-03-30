@@ -1,3 +1,5 @@
+""" Store and get messages from cache """
+
 from django.core.cache import cache
 
 from threadless_router.base import queue
