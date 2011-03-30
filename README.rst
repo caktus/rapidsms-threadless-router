@@ -8,7 +8,9 @@ httptester_cache
 ----------------
 
 ``httptester_cache`` overrides key components in the legacy ``httptester`` app
-to provide identical functionality. Django's cache backend used as dummy storage.
+to provide identical functionality. Django's cache backend is used as dummy storage.
+
+**httptester_cache Setup**
 
 * Add `httptester-cache` to ``INSTALLED_BACKENDS``::
 
