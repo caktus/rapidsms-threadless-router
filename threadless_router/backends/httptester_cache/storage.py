@@ -2,7 +2,7 @@
 
 from django.core.cache import cache
 
-from threadless_router.base import queue
+from threadless_router.base import incoming
 
 
 CACHE_KEY = 'rapidsms-httptester-cache'
@@ -21,4 +21,4 @@ def store_message(direction, identity, text):
 
 def store_and_queue(identity, text):
     store_message('in', identity, text)
-    queue('httptester-cache', identity, text)
+    incoming('httptester-cache', identity, text)
