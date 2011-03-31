@@ -9,9 +9,10 @@ from threadless_router.backends.httptester import storage
 from threadless_router.backends.httptester import forms
 
 
-def generate_identity(req):
+def generate_identity(req, backend_name):
     identity = randint(111111, 999999)
-    return HttpResponseRedirect(reverse(message_tester, args=[identity]))
+    return HttpResponseRedirect(reverse(message_tester, args=[backend_name,
+                                                              identity]))
 
 
 def message_tester(request, backend_name, identity):

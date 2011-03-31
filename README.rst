@@ -26,7 +26,7 @@ to provide identical functionality. Django's cache backend is used as dummy stor
 
     RAPIDSMS_TABS = [
         # ...
-        ("threadless_router.backends.httptester.views.generate_identity", "Message Tester"),
+        ("httptester-index", "Message Tester"),
         # ...
     ]
 
@@ -34,6 +34,9 @@ to provide identical functionality. Django's cache backend is used as dummy stor
 
     urlpatterns = patterns('',
         # ...
+        url(r'^httptester/$',
+            'threadless_router.backends.httptester.views.generate_identity',
+            {'backend_name': 'httptester'}, name='httptester-index'),
         (r'^httptester/', include('threadless_router.backends.httptester.urls')),
         # ...
     )
