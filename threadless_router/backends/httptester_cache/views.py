@@ -5,9 +5,8 @@ from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 
-from rapidsms.contrib.httptester import forms
-
 from threadless_router.backends.httptester_cache import storage
+from threadless_router.backends.httptester_cache import forms
 
 
 def generate_identity(req):
@@ -15,7 +14,7 @@ def generate_identity(req):
     return HttpResponseRedirect(reverse(message_tester, args=[identity]))
 
 
-def message_tester(request, identity):
+def message_tester(request, backend_name, identity):
     if request.method == "POST":
         form = forms.MessageForm(request.POST)
         if form.is_valid():
@@ -28,8 +27,8 @@ def message_tester(request, identity):
             # field. this may be empty, which is fine, since contactcs
             # can (and will) submit empty sms, too.
             else:
-                storage.store_and_queue(identity, cd["text"])
-            url = reverse(message_tester, args=[identity])
+                storage.store_and_queue(backend_name, identity, cd["text"])
+            url = reverse(message_tester, args=[backend_name, identity])
             return HttpResponseRedirect(url)
 
     else:

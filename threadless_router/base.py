@@ -8,11 +8,11 @@ from rapidsms.utils.modules import try_import
 from threadless_router.router import Router
 
 
-__all__ = ('queue',)
+__all__ = ('incoming',)
 
 
 def incoming(backend_name, identity, text):
-    backend = settings.INSTALLED_BACKENDS["httptester-cache"]
+    backend = settings.INSTALLED_BACKENDS[backend_name]
     if "HANDLER" in backend:
         module = try_import(backend['HANDLER'])
         if module:

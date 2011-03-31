@@ -19,6 +19,6 @@ def store_message(direction, identity, text):
     cache.set(CACHE_KEY, messages)
 
 
-def store_and_queue(identity, text):
+def store_and_queue(backend_name, identity, text):
     store_message('in', identity, text)
-    incoming('httptester-cache', identity, text)
+    incoming(backend_name, identity, text)
