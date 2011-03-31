@@ -1,6 +1,6 @@
 from rapidsms.backends.base import BackendBase
 
-from threadless_router.backends.httptester_cache.storage import store_message
+from threadless_router.backends.httptester.storage import store_message
 
 
 class HttpTesterCacheBackend(BackendBase):

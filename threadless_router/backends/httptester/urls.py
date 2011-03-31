@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 
-from threadless_router.backends.httptester_cache import views
+from threadless_router.backends.httptester import views
 
 
 urlpatterns = patterns('',

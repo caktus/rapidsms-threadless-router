@@ -5,8 +5,8 @@ from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 
-from threadless_router.backends.httptester_cache import storage
-from threadless_router.backends.httptester_cache import forms
+from threadless_router.backends.httptester import storage
+from threadless_router.backends.httptester import forms
 
 
 def generate_identity(req):
