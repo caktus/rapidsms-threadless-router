@@ -12,11 +12,11 @@ to provide identical functionality. Django's cache backend is used as dummy stor
 
 **httptester Setup**
 
-* Add `httptester-cache` to ``INSTALLED_BACKENDS``::
+* Add `httptester` to ``INSTALLED_BACKENDS``::
 
     INSTALLED_BACKENDS = {
     # ...
-        "httptester-cache": {
+        "httptester": {
             "ENGINE": "threadless_router.backends.httptester.backend",
         },
     # ...
@@ -30,7 +30,7 @@ to provide identical functionality. Django's cache backend is used as dummy stor
         # ...
     ]
 
-* Add or replace existing ``httptester`` urls with ``httptester`` urls::
+* Add ``httptester`` urls::
 
     urlpatterns = patterns('',
         # ...
