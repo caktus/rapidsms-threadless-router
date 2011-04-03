@@ -12,23 +12,23 @@ to provide identical functionality. Django's cache backend is used as dummy stor
 
 **httptester Setup**
 
+* Add `httptester` to ``INSTALLED_APPS``::
+
+    INSTALLED_APPS = [
+        # ...
+        "threadless_router.backends.httptester",
+        # ...
+    ]
+
 * Add `httptester` to ``INSTALLED_BACKENDS``::
 
     INSTALLED_BACKENDS = {
-    # ...
+        # ...
         "httptester": {
             "ENGINE": "threadless_router.backends.httptester.backend",
         },
-    # ...
+        # ...
     }
-
-* Update ``RAPIDSMS_TABS`` to reference new view::
-
-    RAPIDSMS_TABS = [
-        # ...
-        ("httptester-index", "Message Tester"),
-        # ...
-    ]
 
 * Add ``httptester`` urls::
 
@@ -40,5 +40,13 @@ to provide identical functionality. Django's cache backend is used as dummy stor
         (r'^httptester/', include('threadless_router.backends.httptester.urls')),
         # ...
     )
+
+* Update ``RAPIDSMS_TABS`` to reference new view::
+
+    RAPIDSMS_TABS = [
+        # ...
+        ("httptester-index", "Message Tester"),
+        # ...
+    ]
 
 Development by `Caktus Consulting Group <http://www.caktusgroup.com/>`_.
