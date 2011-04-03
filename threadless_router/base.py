@@ -12,7 +12,7 @@ __all__ = ('incoming',)
 
 
 def incoming(backend_name, identity, text):
-    backend = settings.INSTALLED_BACKENDS[backend_name]
+    backend = settings.INSTALLED_BACKENDS.get(backend_name, {})
     if "HANDLER" in backend:
         module = try_import(backend['HANDLER'])
         if module:
