@@ -21,6 +21,7 @@ class HttpTest(TestCase):
         return self.view(request, backend_name='simple-http')
 
     def testValidForm(self):
+        """ Form should be valid if POST keys match configuration """
         view = views.SimpleHttpBackendView(conf=self.conf)
         data = {'phone': '1112223333', 'message': 'hi there'}
         view.request = self.rf.post(self.url, data)
@@ -28,6 +29,7 @@ class HttpTest(TestCase):
         self.assertTrue(form.is_valid())
 
     def testInvalidForm(self):
+        """ Form is invalid if POST keys don't match configuration """
         view = views.SimpleHttpBackendView(conf=self.conf)
         data = {'invalid-phone': '1112223333', 'invalid-message': 'hi there'}
         view.request = self.rf.post(self.url, data)
@@ -35,6 +37,7 @@ class HttpTest(TestCase):
         self.assertFalse(form.is_valid())
 
     def testInvalidResponse(self):
+        """ HTTP 400 should return if form is invalid """
         data = {'invalid-phone': '1112223333', 'message': 'hi there'}
         response = self._post(data)
         self.assertEqual(response.status_code, 400)
