@@ -12,7 +12,10 @@ class Router(LegacyRouter):
     def start(self):
         self.info("starting router")
         for name in settings.INSTALLED_APPS:
-            self.add_app(name)
+            try:
+                self.add_app(name)
+            except Exception as e:
+                self.exception(e)
         for name, conf in settings.INSTALLED_BACKENDS.items():
             self.add_backend(name, conf.get("ENGINE"), conf)
         self._start_all_apps()
