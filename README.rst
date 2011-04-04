@@ -2,7 +2,14 @@ rapidsms-threadless-router
 ==========================
 
 A `RapidSMS <https://github.com/rapidsms/rapidsms>`_ router implementation that
-removes the threading functionality from the legacy Router class.
+removes the threading functionality from the legacy Router class.  Rather, all
+inbound requests are handled via the main HTTP thread.  Backends can optionally
+pass requests to a backend message queue for out-of-band responses.
+``threadless_router`` attempts to:
+
+* Make RapidSMS backends more Django-like.  Use Django's URL routing and views to handle inbound HTTP requests.
+* Remove clutter and complexity of route process threaded backends.
+* Ease testing -- no more ``threading`` or ``Queue`` modules slowing down tests.
 
 httptester
 ----------
