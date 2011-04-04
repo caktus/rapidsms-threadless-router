@@ -2,6 +2,8 @@ from django.conf import settings
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.generic import View
 from django.views.generic.edit import FormMixin
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 
 from rapidsms.log.mixin import LoggerMixin
 
@@ -12,6 +14,10 @@ from threadless_router.backends.http.forms import HttpForm
 class BaseHttpBackendView(FormMixin, LoggerMixin, View):
 
     conf = {}
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super(BaseHttpBackendView, self).dispatch(*args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         self.backend_name = kwargs.get('backend_name')
