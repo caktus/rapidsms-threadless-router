@@ -1,3 +1,5 @@
+import copy
+
 from rapidsms.conf import settings
 from rapidsms.router import Router as LegacyRouter
 
@@ -17,7 +19,9 @@ class Router(LegacyRouter):
             except Exception as e:
                 self.exception(e)
         for name, conf in settings.INSTALLED_BACKENDS.items():
-            self.add_backend(name, conf.get("ENGINE"), conf)
+            parsed_conf = copy.copy(conf)
+            engine = parsed_conf.pop('ENGINE')
+            self.add_backend(name, engine, parsed_conf)
         self._start_all_apps()
         self.running = True
 
