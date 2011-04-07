@@ -22,6 +22,7 @@ class HttpBackend(BackendBase):
             response = urllib2.urlopen(url)
         except Exception, e:
             self.exception(e)
-            return
+            return False
         self.info('SENT')
         self.debug(response)
+        return True
