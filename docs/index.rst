@@ -24,7 +24,6 @@ Contents:
    
    works
    using
-   backends
    celery
 
 Indices and tables
