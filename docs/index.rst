@@ -25,6 +25,7 @@ Contents:
    works
    using
    queue
+   testing
 
 Indices and tables
 ==================
