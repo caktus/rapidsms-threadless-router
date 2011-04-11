@@ -1,8 +1,15 @@
-Celery Support
---------------
+Asynchronous Task Queues
+========================
 
-``threadless_router`` allows inbound messages to be easily passed off to a
-message queue. A celery handler is bundled for example.
+``threadless_router`` allows inbound messages to be easily passed off to an
+asynchronous task queue, such as `Celery <http://celeryproject.org/>`_.  Task
+queues allow message processing to be handled outside of the HTTP
+request/response cycle.
+
+django-celery
+-------------
+
+A celery handler is bundled for example.
 
 * Install ``djcelery`` with pip::
 

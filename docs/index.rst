@@ -24,7 +24,7 @@ Contents:
    
    works
    using
-   celery
+   queue
 
 Indices and tables
 ==================

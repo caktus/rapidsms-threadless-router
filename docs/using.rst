@@ -1,12 +1,28 @@
 Using rapidsms-threadless-router
 ================================
 
+Caveats and Incompatibilities
+-----------------------------
+
 ``threadless_router`` can integrate into existing RapidSMS projects.  However,
 legacy backends will not work, so you should use the backends bundled with
 ``threadless_router``, available in the community, or create your own.  As all
 routing is handled from within the HTTP thread, non-HTTP backends, such as
 ``pygsm``, are not (and will never be) compatible with ``threadless_router``.
 You should use an HTTP backend with Kannel to achieve the same functionality.
+
+The following legacy RapidSMS applications cannot be used with
+``threadless_router``:
+
+* ``rapidsms.contrib.httptester`` - A new :ref:`httptester` is bundled as a
+  replacement.
+* ``rapidsms.contrib.scheduler`` - The legacy scheduler uses threads to achieve
+  crontab-like functionality. Instead, you can use other schedulers such as
+  celerybeat.
+* ``rapidsms.contrib.ajax``
+* ``rapidsms.contrib.messagelog``
+
+.. _httptester:
 
 httptester
 ----------
