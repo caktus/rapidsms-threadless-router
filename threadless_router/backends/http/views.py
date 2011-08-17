@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseBadRequest
-from django.views.generic import View
-from django.views.generic.edit import FormMixin
+from django.views.generic.edit import FormMixin, ProcessFormView
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
@@ -11,9 +10,10 @@ from threadless_router.base import incoming
 from threadless_router.backends.http.forms import HttpForm
 
 
-class BaseHttpBackendView(FormMixin, LoggerMixin, View):
+class BaseHttpBackendView(FormMixin, LoggerMixin, ProcessFormView):
 
-    conf = {}
+    http_method_names = ['post']
+    conf = None
 
     @method_decorator(csrf_exempt)
     def dispatch(self, *args, **kwargs):
@@ -21,14 +21,9 @@ class BaseHttpBackendView(FormMixin, LoggerMixin, View):
 
     def post(self, request, *args, **kwargs):
         self.backend_name = kwargs.get('backend_name')
-        if not self.conf:
+        if self.conf is None:
             self.conf = settings.INSTALLED_BACKENDS[self.backend_name]
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
-        if form.is_valid():
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
+        return super(BaseHttpBackendView, self).post(request, *args, **kwargs)
 
     def form_valid(self, form):
         self.debug('form is valid')
