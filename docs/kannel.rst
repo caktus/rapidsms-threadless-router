@@ -17,7 +17,7 @@ To configure Kannel to connect to a RapidSMS project that uses
 ``threadless_router``, you need to add a few things to your Kannel
 configuration (usually ``/etc/kannel/kannel.conf``).
 
-* Add a ``sendsms-user`` for RapidSMS to connect as::
+* Add a ``sendsms-user`` for RapidSMS to use to send outbound messages::
 
     group = sendsms-user
     username = rapidsms
@@ -25,7 +25,7 @@ configuration (usually ``/etc/kannel/kannel.conf``).
     user-deny-ip = "*.*.*.*"
     user-allow-ip = "127.0.0.1;"
 
-* Add an ``sms-service`` entry to handle inbound messages for RapidSMS::
+* Add an ``sms-service`` entry to pass inbound messages to RapidSMS::
 
     group = sms-service
     keyword = default
@@ -40,7 +40,7 @@ The ``kannel`` backend provides an implementation of the ``http`` backend for
 integrating with Kannel.  To enable the `kannel` backend on an existing
 project, complete the following steps:
 
-* Add `kannel` app to ``INSTALLED_APPS``::
+* Add ``kannel`` app to ``INSTALLED_APPS``::
 
     INSTALLED_APPS = [
         # ...
@@ -48,7 +48,7 @@ project, complete the following steps:
         # ...
     ]
 
-* Add `my-kannel-backend` to ``INSTALLED_BACKENDS``::
+* Add ``my-kannel-backend`` to ``INSTALLED_BACKENDS``::
 
     INSTALLED_BACKENDS = {
         # ...
@@ -75,4 +75,4 @@ project, complete the following steps:
     )
 
 * Now incoming requests to /backend/my-kannel-backend/ will be handled by the
-newly configured Kannel backend.
+  newly configured Kannel backend.
