@@ -1,4 +1,4 @@
-from rapidsms.backends.base import BackendBase
+from threadless_router.backends.base import BackendBase
 
 from threadless_router.backends.httptester.storage import store_message
 

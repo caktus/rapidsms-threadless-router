@@ -1,6 +1,6 @@
 import urllib2
 
-from rapidsms.backends.base import BackendBase
+from threadless_router.backends.base import BackendBase
 
 
 EXAMPLE_URL = 'http://127.0.0.1/?identity=%(identity)s&text=%(text)s'
