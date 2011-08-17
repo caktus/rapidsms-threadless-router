@@ -1,0 +1,32 @@
+from testbed.settings import *
+
+# you should configure your database here before doing any real work.
+# see: http://docs.djangoproject.com/en/dev/ref/settings/#databases
+
+# for postgresql:
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "threadless.db",
+    }
+}
+
+INSTALLED_BACKENDS = {
+    "httptester": {
+        "ENGINE": "threadless_router.backends.httptester.backend",
+    },
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake'
+    }
+}
+
+# MIDDLEWARE_CLASSES = list(MIDDLEWARE_CLASSES)
+# MIDDLEWARE_CLASSES.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
+# INTERNAL_IPS = ('127.0.0.1',)
+# INSTALLED_APPS = list(INSTALLED_APPS)
+# INSTALLED_APPS.append('debug_toolbar')
+# DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False}
