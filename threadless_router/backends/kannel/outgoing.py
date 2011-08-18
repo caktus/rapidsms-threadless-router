@@ -1,10 +1,11 @@
 import urllib
+import urllib2
 import copy
 
-from threadless_router.backends.http.outgoing import HttpBackend
+from threadless_router.backends.base import BackendBase
 
 
-class KannelBackend(HttpBackend):
+class KannelBackend(BackendBase):
 
     def configure(self, sendsms_url='http://127.0.0.1:13013/cgi-bin/sendsms',
                   sendsms_params=None, charset=None, coding=None,
@@ -24,3 +25,16 @@ class KannelBackend(HttpBackend):
         url_args['charset'] = self.charset
         url = '?'.join([self.sendsms_url, urllib.urlencode(url_args)])
         return url
+
+    def send(self, message):
+        self.info('Sending message: %s' % message)
+        url = self.prepare_message(message)
+        try:
+            self.debug('Opening URL: %s' % url)
+            response = urllib2.urlopen(url)
+        except Exception, e:
+            self.exception(e)
+            return False
+        self.info('SENT')
+        self.debug('response: %s' % response.read())
+        return True
