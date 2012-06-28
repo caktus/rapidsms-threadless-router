@@ -27,6 +27,7 @@ Contents:
    kannel
    queue
    testing
+   changelog
 
 Indices and tables
 ==================
