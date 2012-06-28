@@ -1,5 +1,10 @@
-*.pyc
+*.py[co]
+*~
 localsettings.py
 docs/_build/*
 *.db
 *.log
+dist/*
+build/*
+*.egg-info/*
+.coverage
