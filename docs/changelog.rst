@@ -5,6 +5,15 @@ Below is the history of the rapidsms-threadless-router project. With each releas
 we note new features, large bug fixes and any backwards incompatible changes.
 
 
+v0.1.1 (Released 2012-06-28)
+------------------------------------
+
+Bug Fixes
+_________________________
+
+- Fixed broken packaging due to missing README in the distribution
+
+
 v0.1.0 (Released 2012-06-28)
 ------------------------------------
 
