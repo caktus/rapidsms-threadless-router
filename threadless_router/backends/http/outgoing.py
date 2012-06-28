@@ -1,28 +1,25 @@
+import urllib
 import urllib2
 
-from rapidsms.backends.base import BackendBase
+from threadless_router.backends.base import BackendBase
 
 
-EXAMPLE_URL = 'http://127.0.0.1/?identity=%(identity)s&text=%(text)s'
+EXAMPLE_URL = 'http://127.0.0.1/'
 
 
 class HttpBackend(BackendBase):
 
-    def prepare_message(self, message):
-        context = {'text': message.text,
-                   'identity': message.connection.identity}
-        url = self._config.get('outgoing_url', EXAMPLE_URL)
-        return url % context
-
     def send(self, message):
         self.info('Sending message: %s' % message)
-        url = self.prepare_message(message)
+        url = self._config.get('outgoing_url', EXAMPLE_URL)
+        data = {'text': message.text,
+                'identity': message.connection.identity}
         try:
             self.debug('Opening URL: %s' % url)
-            response = urllib2.urlopen(url)
+            response = urllib2.urlopen(url, urllib.urlencode(data))
         except Exception, e:
             self.exception(e)
             return False
         self.info('SENT')
-        self.debug(response)
+        self.debug('response: %s' % response.read())
         return True

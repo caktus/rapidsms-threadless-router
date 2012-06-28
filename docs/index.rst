@@ -24,8 +24,10 @@ Contents:
    
    works
    using
+   kannel
    queue
    testing
+   changelog
 
 Indices and tables
 ==================
