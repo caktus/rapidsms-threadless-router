@@ -4,6 +4,14 @@ Changelog
 Below is the history of the rapidsms-threadless-router project. With each release
 we note new features, large bug fixes and any backwards incompatible changes.
 
+v0.1.2 (Released 2012-06-29)
+------------------------------------
+
+Bug Fixes
+_________________________
+
+- Fixed packaging of ``httptester`` templates and css
+
 
 v0.1.1 (Released 2012-06-28)
 ------------------------------------

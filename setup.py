@@ -15,4 +15,5 @@ setup(
     license='LICENSE.txt',
     description='Threadless router implementation for RapidSMS',
     long_description=open('README.rst').read(),
+    zip_safe=False,
 )
