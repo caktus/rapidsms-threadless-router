@@ -1,7 +1,6 @@
 import datetime
-from django.conf import settings
 
-from rapidsms.models import Connection, Backend
+from rapidsms.models import Backend
 from rapidsms.messages import IncomingMessage
 
 from threadless_router.router import Router
@@ -18,11 +17,7 @@ class IncomingTask(Task):
         # remove the djcelery app from the INSTALLED_APPS list
         # to prevent the router from attempting to process messages
         # through the app module of djcelery
-        try:
-            settings.INSTALLED_APPS.remove('djcelery')
-        except ValueError:
-            pass
-        router = Router(apps=settings.INSTALLED_APPS)
+        router = Router()
         response = router.incoming(message)
 
 
