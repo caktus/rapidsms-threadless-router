@@ -47,10 +47,14 @@ class Router(LegacyRouter):
         the router is started. Return the backend instance.
         """
         if not inspect.isclass(module_name):
-            cls = BackendBase.find(module_name)
-            if cls is None: return None
-        else:
+            try:
+                cls = BackendBase.find(module_name)
+            except AttributeError:
+                cls = None
+        elif issubclass(module_name, BackendBase):
             cls = module_name
+        if not cls:
+            return None
         config = self._clean_backend_config(config or {})
         backend = cls(self, name, **config)
         self.backends[name] = backend
@@ -63,10 +67,14 @@ class Router(LegacyRouter):
         app instance.
         """
         if not inspect.isclass(module_name):
-            cls = AppBase.find(module_name)
-            if cls is None: return None
-        else:
+            try:
+                cls = AppBase.find(module_name)
+            except AttributeError:
+                cls = None
+        elif issubclass(module_name, AppBase):
             cls = module_name
+        if not cls:
+            return None
         app = cls(self)
         self.apps.append(app)
         return app

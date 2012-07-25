@@ -4,6 +4,15 @@ Changelog
 Below is the history of the rapidsms-threadless-router project. With each release
 we note new features, large bug fixes and any backwards incompatible changes.
 
+v0.1.3 (Released 2012-07-25)
+------------------------------------
+
+Bug Fixes
+_________________________
+
+- Fixed exception when an originary app such as djcelery contains an app module. Thanks to Tim Akinbo.
+
+
 v0.1.2 (Released 2012-06-29)
 ------------------------------------
 

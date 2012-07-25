@@ -1,6 +1,6 @@
 import datetime
 
-from rapidsms.models import Connection, Backend
+from rapidsms.models import Backend
 from rapidsms.messages import IncomingMessage
 
 from threadless_router.router import Router
