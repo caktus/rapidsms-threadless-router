@@ -108,3 +108,4 @@ class Router(LegacyRouter):
         # send message from within router
         self.sent = self.backends[msg.connection.backend.name].send(msg)
         msg.sent = self.sent
+        return self.sent
