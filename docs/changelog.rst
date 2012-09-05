@@ -4,6 +4,15 @@ Changelog
 Below is the history of the rapidsms-threadless-router project. With each release
 we note new features, large bug fixes and any backwards incompatible changes.
 
+v0.1.4 (Released 2012-09-05)
+------------------------------------
+
+Bug Fixes
+_________________________
+
+- Fixed ``outgoing`` to report if the message was sent or not. Thanks to Cory Zue.
+
+
 v0.1.3 (Released 2012-07-25)
 ------------------------------------
 
