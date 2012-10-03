@@ -16,6 +16,8 @@ class TestScript(LegacyTestScript):
         self.router.join = lambda: None
         self._init_log(logging.DEBUG)
         self.backend = self.router.backends["mockbackend"]
+        from rapidsms import router
+        router.router = self.router
 
     def sendMessage(self, num, txt, date=None):
         self.router.debug('sending {0} to {1}'.format(txt, num))
