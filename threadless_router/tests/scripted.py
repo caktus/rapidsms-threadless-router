@@ -18,7 +18,7 @@ class TestScript(LegacyTestScript):
         self.backend = self.router.backends["mockbackend"]
 
     def sendMessage(self, num, txt, date=None):
-        self.router.debug('sending {0} to {1}'.format(txt, num))
+        self.router.debug(u'sending {0} to {1}'.format(txt, num))
         return super(TestScript, self).sendMessage(num, txt, date)
 
     def receiveMessage(self):
