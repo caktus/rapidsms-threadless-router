@@ -6,19 +6,21 @@ from rapidsms.tests.scripted import TestScript as LegacyTestScript
 from rapidsms.tests.harness import MockBackend
 
 from threadless_router.router import Router
-
+from rapidsms import router as globalrouter
 
 class TestScript(LegacyTestScript):
 
     def setUp (self):
         backends = {'mockbackend': {"ENGINE": MockBackend}}
         self.router = Router(apps=self.apps, backends=backends)
+        globalrouter.router = self.router
+
         self.router.join = lambda: None
         self._init_log(logging.DEBUG)
         self.backend = self.router.backends["mockbackend"]
 
     def sendMessage(self, num, txt, date=None):
-        self.router.debug('sending {0} to {1}'.format(txt, num))
+        self.router.debug(u'sending {0} to {1}'.format(txt, num))
         return super(TestScript, self).sendMessage(num, txt, date)
 
     def receiveMessage(self):
