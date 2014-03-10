@@ -8,6 +8,7 @@ class HttpTesterCacheBackend(BackendBase):
 
     def send(self, msg):
         store_message('out', msg.connection.identity, msg.text)
+        return True
 
     def start(self):
         """ Override BackendBase.start(), which never returns """
